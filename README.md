@@ -200,5 +200,29 @@ Run `helm delete --purge hello-world` to delete the hello-world from the cluster
 * Modify the versions in the chart (hint: Chart.yaml and values.yaml)
 * Try use helm to deploy the latest version of the application
 
+## Exercise 7 - Scale the hello world application
+
+Scale the number of replica to 3 instances
+```
+kubectl scale deployments/hello-world --replicas=3 -n demoapp 
+```
+
+Checking:
+```
+kubectl get deploy -n demoapp
+kubectl get pods -n demoapp
+```
+
+## Exercise 8 - Rolling update of hello world application
+
+Rolling update of all instances to a newer version within a deployment set
+```
+kubectl set image deployments/hello-world -n demoapp hello-world=dso814/hello-world:0.0.1
+```
+
+Monitoring the update process
+```
+watch -n2 -c 'kubectl get po -n demoapp -o wide'
+```
 
 
